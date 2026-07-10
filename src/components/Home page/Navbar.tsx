@@ -58,13 +58,13 @@ const Navbar = () => {
         </div>
     );
     
+    
     const { data: session } = authClient.useSession();
     console.log('session in nav bar : ', session)
 
     const handleLogOut = async (): Promise<void> => {
     await authClient.signOut();
     toast.success("Logged out!! 😊") 
-
 };
 
     const userMenu = (
@@ -101,7 +101,7 @@ const Navbar = () => {
         >
 
             <li>
-                <Link href="/dashboard">
+                <Link href={`/dashboard/${session?.user?.role}`}>
                   <FcHome />  Dashboard
                 </Link>
             </li>
