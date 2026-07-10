@@ -22,8 +22,8 @@ const navItems: NavItem[] = [
         href: "/food",
     },
     {
-        name: "Shop",
-        href: "/shop",
+        name: "restaurants",
+        href: "/restaurants",
     },
 ];
 
@@ -60,7 +60,7 @@ const Navbar = () => {
     
     
     const { data: session } = authClient.useSession();
-    console.log('session in nav bar : ', session)
+    // console.log('session in nav bar : ', session)
 
     const handleLogOut = async (): Promise<void> => {
     await authClient.signOut();

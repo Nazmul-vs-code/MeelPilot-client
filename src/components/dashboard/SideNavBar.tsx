@@ -25,6 +25,7 @@ type SidebarItem = {
     title: string;
     href: string;
     icon: IconType;
+    exact?: boolean;
 };
 
 type UserRole = "seller" | "buyer" | "admin";
@@ -35,6 +36,7 @@ const sidebarItems: Record<UserRole, SidebarItem[]> = {
             title: "Dashboard",
             href: "/dashboard/seller",
             icon: FaHome,
+            exact: true,
         },
         {
             title: "Orders",
@@ -58,6 +60,7 @@ const sidebarItems: Record<UserRole, SidebarItem[]> = {
             title: "Dashboard",
             href: "/dashboard/buyer",
             icon: FaHome,
+            exact: true,
         },
         {
             title: "My Orders",
@@ -81,6 +84,7 @@ const sidebarItems: Record<UserRole, SidebarItem[]> = {
             title: "Dashboard",
             href: "/dashboard/admin",
             icon: FaHome,
+            exact: true,
         },
         {
             title: "Manage Users",
@@ -128,15 +132,15 @@ const SideNavBar = () => {
 
             {/* User Info */}
 
-            <div className=" bg-yellow-50 p-6">
+            <div className="bg-yellow-50 p-6">
 
                 <div className="flex items-center gap-3">
 
                     <Image
                         src={user?.image || "/avatar.png"}
                         alt={user?.name || "User"}
-                        width={25}
-                        height={25}
+                        width={50}
+                        height={50}
                         className="rounded-full object-cover"
                     />
 
@@ -164,23 +168,21 @@ const SideNavBar = () => {
 
                     const ActiveIcon = item.icon;
 
-                    const isActive =
-                        pathname === item.href ||
-                        pathname.startsWith(item.href + "/");
+                    const isActive = item.exact
+                        ? pathname === item.href
+                        : pathname.startsWith(item.href);
 
                     return (
                         <Link
                             key={item.href}
                             href={item.href}
                             onClick={() => setOpen(false)}
-                            className={`flex items-center gap-3 rounded-xl px-4 py-3 transition-all duration-200
-                                ${
-                                    isActive
-                                        ? "bg-red-500 text-white shadow"
-                                        : "hover:bg-yellow-100"
-                                }`}
+                            className={`flex items-center gap-3 rounded-xl px-4 py-3 transition-all duration-200 ${
+                                isActive
+                                    ? "bg-red-500 text-white shadow"
+                                    : "hover:bg-yellow-100"
+                            }`}
                         >
-
                             <ActiveIcon size={18} />
 
                             <span className="font-medium">
@@ -195,7 +197,7 @@ const SideNavBar = () => {
 
             {/* Logout */}
 
-            <div className=" p-5">
+            <div className="p-5">
 
                 <button
                     onClick={handleLogout}
@@ -230,7 +232,7 @@ const SideNavBar = () => {
 
             </div>
 
-            {/* Desktop Sidebar */}
+            {/* Desktop */}
 
             <aside className="hidden lg:block sticky top-0 h-screen w-72 bg-white shadow-sm">
 
