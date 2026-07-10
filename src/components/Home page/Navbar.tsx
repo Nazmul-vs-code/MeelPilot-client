@@ -63,7 +63,7 @@ const Navbar = () => {
 
     const handleLogOut = async (): Promise<void> => {
     await authClient.signOut();
-    toast.success("Logged out!! 😊")
+    toast.success("Logged out!! 😊") 
 
 };
 
