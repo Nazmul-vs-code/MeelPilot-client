@@ -29,7 +29,7 @@ type Props = {
     restaurant: Restaurant;
 };
 
-const RestaurantDetails = ({ restaurant }: Props) => {
+const RestaurantDetails = ({ restaurant }: Props) => { 
     return (
         <section className="mx-auto max-w-6xl px-5 py-10">
             <motion.div
