@@ -17,6 +17,7 @@ type SignUpForm = {
     image: string;
     email: string;
     password: string;
+    role: "buyer" | "seller";
 };
 
 const SignUpPage = () => {
@@ -25,6 +26,7 @@ const SignUpPage = () => {
         image: "",
         email: "",
         password: "",
+        role: "buyer",
     });
 
     const handleChange = (
@@ -52,6 +54,7 @@ const SignUpPage = () => {
             email: formData.email, // required
             password: formData.password, // required
             image: formData.image,
+            role: formData.role,
             callbackURL: '/'
         });
 
@@ -59,7 +62,7 @@ const SignUpPage = () => {
         if (data) {
 
             toast.success(
-                "Welcome Mr./miss "+
+                "Welcome Mr./miss " +
                 data?.user?.name +
                 ". Your account was created!! "
             )
@@ -68,7 +71,7 @@ const SignUpPage = () => {
                 window.location.href = '/'
             }, 2000);
         }
-        else{
+        else {
             toast.error("error occured")
         }
     };
@@ -179,6 +182,27 @@ const SignUpPage = () => {
                                     className="grow"
                                 />
                             </label>
+                        </div>
+
+                        <div>
+                            <label className="label font-semibold text-gray-700">
+                                Sign Up As
+                            </label>
+
+                            <select
+                                name="role"
+                                value={formData.role}
+                                onChange={(e) =>
+                                    setFormData((prev) => ({
+                                        ...prev,
+                                        role: e.target.value as "buyer" | "seller",
+                                    }))
+                                }
+                                className="select select-bordered w-full"
+                            >
+                                <option value="buyer">Buyer</option>
+                                <option value="seller">Seller</option>
+                            </select>
                         </div>
 
                         <button
