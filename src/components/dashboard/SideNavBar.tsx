@@ -108,12 +108,12 @@ const SideNavBar = () => {
     const [open, setOpen] = useState(false);
 
     const pathname = usePathname();
-
     const router = useRouter();
 
     const { data: session } = authClient.useSession();
 
-    const user = session?.user;
+    // Fixed: Cast via Record type to avoid reading fields directly off a potentially null session object
+    const user = session?.user as (Record<string, any> & { role?: string }) | undefined;
 
     const role = (user?.role ?? "buyer") as UserRole;
 
@@ -121,21 +121,15 @@ const SideNavBar = () => {
 
     const handleLogout = async () => {
         await authClient.signOut();
-
         router.push("/");
-
         router.refresh();
     };
 
     const SidebarContent = (
         <div className="flex h-full flex-col">
-
             {/* User Info */}
-
             <div className="bg-yellow-50 p-6">
-
                 <div className="flex items-center gap-3">
-
                     <Image
                         src={user?.image || "/avatar.png"}
                         alt={user?.name || "User"}
@@ -145,7 +139,6 @@ const SideNavBar = () => {
                     />
 
                     <div>
-
                         <h2 className="font-bold text-lg">
                             {user?.name}
                         </h2>
@@ -153,19 +146,13 @@ const SideNavBar = () => {
                         <p className="text-sm text-red-500 font-semibold capitalize">
                             {role}
                         </p>
-
                     </div>
-
                 </div>
-
             </div>
 
             {/* Navigation */}
-
             <nav className="flex-1 space-y-2 p-5">
-
                 {navItems.map((item) => {
-
                     const ActiveIcon = item.icon;
 
                     const isActive = item.exact
@@ -188,71 +175,51 @@ const SideNavBar = () => {
                             <span className="font-medium">
                                 {item.title}
                             </span>
-
                         </Link>
                     );
                 })}
-
             </nav>
 
             {/* Logout */}
-
             <div className="p-5">
-
                 <button
                     onClick={handleLogout}
                     className="btn btn-outline btn-error w-full"
                 >
                     <FaSignOutAlt />
-
                     Logout
-
                 </button>
-
             </div>
-
         </div>
     );
 
     return (
         <>
             {/* Mobile */}
-
             <div className="lg:hidden p-4">
-
                 <button
                     onClick={() => setOpen(true)}
                     className="btn btn-outline"
                 >
                     <FaBars />
-
                     Menu
-
                 </button>
-
             </div>
 
             {/* Desktop */}
-
             <aside className="hidden lg:block sticky top-0 h-screen w-72 bg-white shadow-sm">
-
                 {SidebarContent}
-
             </aside>
 
             {/* Mobile Drawer */}
-
             {open && (
-
                 <div className="fixed inset-0 z-50 lg:hidden">
-
                     <div
                         onClick={() => setOpen(false)}
                         className="absolute inset-0 bg-black/40"
                     />
 
                     <aside className="relative h-full w-72 bg-white shadow-xl">
-
                         <button
                             onClick={() => setOpen(false)}
                             className="absolute right-4 top-4 text-xl"
@@ -261,13 +228,9 @@ const SideNavBar = () => {
                         </button>
 
                         {SidebarContent}
-
                     </aside>
-
                 </div>
-
             )}
-
         </>
     );
 };

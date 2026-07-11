@@ -1,5 +1,6 @@
 import FoodList from "@/components/food/FoodList";
 import { GetFoods } from "@/lib/api/food";
+import { Suspense } from "react";
 import { FaHamburger } from "react-icons/fa";
 
 const PublicFoodPage = async () => {
@@ -49,7 +50,9 @@ const PublicFoodPage = async () => {
 
             {foods.length ? (
 
-                <FoodList foods={foods} />
+                <Suspense fallback={<div className="py-10 text-center text-gray-500">Loading food filters…</div>}>
+                    <FoodList foods={foods} />
+                </Suspense>
 
             ) : (
 
