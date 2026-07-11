@@ -1,3 +1,5 @@
+import HelthAnalytics from "@/components/Home page/analytics/HelthAnalytics";
+import FoodAnalytics from "@/components/Home page/FoodAnalytics";
 import Hero from "@/components/Home page/hero/Hero";
 import LetestFood from "@/components/Home page/LetestFood";
 import TopRestaurants from "@/components/Home page/TopRestaurants";
@@ -10,6 +12,8 @@ export default function Home() {
       <Hero />
       <TopRestaurants />
       <LetestFood />
+      <FoodAnalytics />
+      <HelthAnalytics />
     </div>
   );
 }
