@@ -11,7 +11,7 @@ export default function Home() {
     <div className="w-10/12 mx-auto flex flex-col gap-10 my-10">
       <Hero />
       <TopRestaurants />
-      <LetestFood />
+      <LetestFood /> 
       <FoodAnalytics />
       <HelthAnalytics />
     </div>
