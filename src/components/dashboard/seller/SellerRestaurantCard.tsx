@@ -27,13 +27,20 @@ type Props = {
     restaurant: Restaurant;
 };
 
+const getSafeImageSrc = (value?: string) => {
+    const trimmed = value?.trim();
+
+    if (!trimmed) return "/restaurant-placeholder.svg";
+
+    if (/^https?:\/\//i.test(trimmed) || trimmed.startsWith("/")) {
+        return trimmed;
+    }
+
+    return "/restaurant-placeholder.svg";
+};
+
 const SellerRestaurantCard = ({ restaurant }: Props) => {
     const router = useRouter();
-
-    console.log(restaurant.status, ' status ')
-
-    
-
 
     //  Delete resturant
     const deleteRestaurant = async (id: string) => {
@@ -62,7 +69,7 @@ const SellerRestaurantCard = ({ restaurant }: Props) => {
 
                 {/* Restaurant Image */}
                 <Image
-                    src={restaurant.image}
+                    src={getSafeImageSrc(restaurant.image)}
                     alt={restaurant.restaurantName}
                     width={170}
                     height={170}

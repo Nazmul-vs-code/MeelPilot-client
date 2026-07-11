@@ -49,7 +49,7 @@ const SignUpPage = () => {
 
         // Better Auth signup will go here
 
-        const { data, error } = await authClient.signUp.email({
+        const { data, error } = await (authClient.signUp.email as any)({
             name: formData.name, // required
             email: formData.email, // required
             password: formData.password, // required
