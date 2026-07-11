@@ -1,11 +1,11 @@
-import Navbar from "@/components/Home page/Navbar";
+import Hero from "@/components/Home page/hero/Hero";
 
 
 export default function Home() {
   return (
     
-    <div>
-      
+    <div className="w-10/12 mx-auto my-10">
+      <Hero />
     </div>
   );
 }
