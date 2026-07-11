@@ -1,4 +1,4 @@
-import { GetApiFunction } from "./getApi";
+import { GetApiFunction, GetApiFunctionById } from "./getApi";
 
 export const GetFoods = async () => {
     try {
@@ -7,4 +7,9 @@ export const GetFoods = async () => {
         console.error("Failed to fetch foods:", error);
         return [];
     }
+};
+
+
+export const GetFoodById = async (id: string) => {
+    return await GetApiFunctionById("/api/foods", id);
 };

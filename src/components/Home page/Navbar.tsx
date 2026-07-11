@@ -18,8 +18,8 @@ const navItems: NavItem[] = [
         href: "/",
     },
     {
-        name: "Food",
-        href: "/food",
+        name: "Foods",
+        href: "/foods",
     },
     {
         name: "restaurants",
