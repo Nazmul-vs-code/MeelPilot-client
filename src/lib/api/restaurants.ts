@@ -12,3 +12,11 @@ export const GetRestaurantById = async (
 ) => {
     return await GetApiFunctionById(endpoint, id);
 };
+
+
+
+export const GetRestaurantBySellerEmail = async (email: string) => {
+    return await GetApiFunction(
+        `/api/seller/getrestaurantBySellerEmail?email=${email}`
+    );
+};
