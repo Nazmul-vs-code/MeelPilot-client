@@ -1,4 +1,4 @@
-import PublicFoodCard from "@/components/food/PublicFoodCard";
+import FoodList from "@/components/food/FoodList";
 import { GetFoods } from "@/lib/api/food";
 import { FaHamburger } from "react-icons/fa";
 
@@ -41,26 +41,15 @@ const PublicFoodPage = async () => {
 
                 <div className="rounded-full bg-red-50 px-6 py-3 text-lg font-bold text-red-500 shadow">
 
-                    {foods.length} Food Item{foods.length > 1 && "s"}
+                    {foods.length} Food Item{foods.length !== 1 && "s"}
 
                 </div>
 
             </div>
 
-            {/* Cards */}
-
             {foods.length ? (
 
-                <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-
-                    {foods.map((food: any) => (
-                        <PublicFoodCard
-                            key={food._id}
-                            food={food}
-                        />
-                    ))}
-
-                </div>
+                <FoodList foods={foods} />
 
             ) : (
 
