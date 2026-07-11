@@ -18,6 +18,7 @@ type Restaurant = {
     _id: string;
     restaurantName: string;
     image: string;
+    status: "pending" | "approved" | "rejected";
 };
 
 type Props = {
@@ -32,6 +33,7 @@ const FoodCreateForm = ({
     const [formData, setFormData] = useState({
         restaurantId: restaurant._id,
         restaurantName: restaurant.restaurantName,
+        restaurantStatus: restaurant.status,
         sellerEmail,
 
         foodName: "",
@@ -58,39 +60,39 @@ const FoodCreateForm = ({
         e.preventDefault();
 
         console.log(formData);
-        
+
         try {
-        const result = await CreateFood(formData);
+            const result = await CreateFood(formData);
 
-        if (result.insertedId) {
-            toast.success("Food added successfully! 🍔");
+            if (result.insertedId) {
+                toast.success("Food added successfully! 🍔");
 
-            // Router.push("/dashboard/seller");
-            window.location.reload()
-            // or router.refresh();
+                // Router.push("/dashboard/seller");
+                window.location.reload()
+                // or router.refresh();
 
-            setFormData({
-                ...formData,
-                foodName: "",
-                image: "",
-                category: "",
-                price: "",
-                quantity: "",
-                preparationTime: "",
-                description: "",
-            });
-        } else {
-            toast.error("Failed to add food.");
+                setFormData({
+                    ...formData,
+                    foodName: "",
+                    image: "",
+                    category: "",
+                    price: "",
+                    quantity: "",
+                    preparationTime: "",
+                    description: "",
+                });
+            } else {
+                toast.error("Failed to add food.");
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("Something went wrong.");
         }
-    } catch (error) {
-        console.error(error);
-        toast.error("Something went wrong.");
-    }
-        
+
     };
 
-    
-    
+
+
     return (
         <section className="space-y-8">
             {/* Header */}
@@ -145,6 +147,12 @@ const FoodCreateForm = ({
                     />
 
                     {/* Hidden Fields */}
+
+                    <input
+                        type="hidden"
+                        name="restaurantStatus"
+                        value={formData.restaurantStatus}
+                    />
 
                     <input
                         type="hidden"
