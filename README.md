@@ -7,7 +7,8 @@ Meal Pilot is a modern food ordering platform built with **Next.js**, **TypeScri
 ## 🌐 Live Project
 
 - **Client:** https://meel-pilot-client.vercel.app/
-- **Server:** _(Add your backend deployment URL here once deployed.)_
+- **Server:** https://meel-pilot-server.vercel.app/
+- **Server Repo:** https://github.com/Nazmul-vs-code/MeelPilot-server
 
 ---
 
